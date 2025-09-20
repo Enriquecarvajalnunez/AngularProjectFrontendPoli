@@ -6,8 +6,11 @@ import { Servicio } from "../../shared/interfaces/services.interface";
 
 const LIMIT = 5;
 
-@Injectable()
-export class ProductService extends BaseHttpServices{     
+@Injectable({
+  providedIn: 'root'
+})
+export class ProductService extends BaseHttpServices{    
+    private apiProductoUrl = 'http://localhost:5217/api/Servicios/producto'; 
     getServices(page: number):Observable<Servicio[]>{
         return this.http.get<any[]>(`${this.apiUrl}`,{
             params:{
@@ -17,7 +20,7 @@ export class ProductService extends BaseHttpServices{
         });
     }
 
-    getService(id: number): Observable<Servicio>{
-        return this.http.get<Servicio>(`${this.apiUrl}/Servicios/${id}`);
+    getService(id: string): Observable<Servicio>{
+        return this.http.get<Servicio>(`${this.apiProductoUrl}/${id}`);
     }
 }

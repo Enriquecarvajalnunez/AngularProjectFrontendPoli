@@ -6,7 +6,7 @@ export default [
         loadComponent: () => import('../servicios-list/servicios-list.component'),
     },
     {
-        path: 'servicios/:id',
+        path: ':id',
         loadComponent: () => import('../servicios-detail/servicios-detail.component')        
     }
 ]as Routes;

@@ -2,12 +2,12 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'servicios',
         loadChildren: () =>
             import('./servicios/features/servicios-shell/servicios.route'),
     },
     {
         path: '**',
-        redirectTo: '',
+        redirectTo: 'servicios',
     }
 ];
