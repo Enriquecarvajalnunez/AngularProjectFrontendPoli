@@ -1,0 +1,15 @@
+<div class="mx-auto max-w-screen-xl">
+    @if(servicesState.state.status() == "loading"){
+        <p>Loading...</p>
+    }@else {
+        
+        <div class="grid grid-cols-[repeat(4,300px)] gap-6">
+            @for(servicio of servicesState.state().servicios; track servicio){
+                <app-service-card class="block" [service]="servicio"/>
+            }
+        </div>        
+        <button (click)="servicesState.prevPage(servicesState.state().page)">⬅️ Anterior</button>
+        <button (click)="servicesState.nextPage(servicesState.state().page)">Siguiente ➡️</button>
+    }    
+</div>
+
