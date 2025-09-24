@@ -2,18 +2,41 @@
   <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
     <h1 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-6">Iniciar Sesión</h1>
     
-    <form>
+    <form [formGroup]="loginForm"> 
       <div class="mb-4">
         <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Correo electrónico</label>
-        <input type="email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="ejemplo@correo.com" />
+        <input 
+          type="email" 
+          formControlName="email"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          [class.border-red-500]="email?.invalid && email?.touched"
+          placeholder="ejemplo@correo.com" 
+        />
+        <div *ngIf="email?.invalid && email?.touched" class="mt-1 text-sm text-red-600">
+          <div *ngIf="email?.errors?.['required']">El correo electrónico es requerido</div>
+          <div *ngIf="email?.errors?.['email']">Por favor ingrese un correo electrónico válido</div>
+        </div>
       </div>
       
       <div class="mb-4">
         <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña</label>
-        <input type="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="********" />
+        <input 
+          type="password" 
+          formControlName="password"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          [class.border-red-500]="password?.invalid && password?.touched"
+          placeholder="********" 
+        />
+        <div *ngIf="password?.invalid && password?.touched" class="mt-1 text-sm text-red-600">
+          <div *ngIf="password?.errors?.['required']">La contraseña es requerida</div>
+          <div *ngIf="password?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</div>
+        </div>
       </div>
       
-      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+      <button 
+        [disabled]="loginForm.invalid"
+        (click)="onSubmit()"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed">
         Ingresar
       </button>
     </form>
